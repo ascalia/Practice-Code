@@ -5,8 +5,7 @@ int sz=50;
 void setup(){
   
   size(800,800);
-}
-void draw(){
+
   
   locx=width/2;
   locy=height/2;
@@ -17,8 +16,8 @@ void draw(){
   
   //initialize acceleration
   
-  accx=0;
-  accy=0;
+  accx=.2;
+  accy=.5;
 }
   void draw(){
     velx+=accx;
@@ -26,11 +25,21 @@ void draw(){
    //add velcoity to location
    locx+=velx;
    locy+=vely;
-   
-   ellipse(locs,locy,sz,sz);
+   velx=.2;
+   vely=.1;
+   ellipse(locx,locy,sz,sz);
    if(locx-sz/2 > 0){
      locx= width + sz/2;
    }
+   if (locx - sz/2 > width) {
+    locx = -sz/2;                 /
+
+  if (locx + sz/2 < 0) {          ..
+    locx = width + sz/2;          /e
+  }
+
    
    if( locy-sz/2> height){
-     locy= -sz/2
+     locy= -sz/2; }
+     
+  }
