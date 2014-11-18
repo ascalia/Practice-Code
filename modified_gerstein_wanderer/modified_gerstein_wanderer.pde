@@ -1,64 +1,60 @@
-float locx, locy;        //declare location
-float velx, vely;        //declare velocity
-float accx, accy;        //declare acceleration
+PVector loc;        //declare location
+PVector vel;        //declare velocity
+PVector acc;        //declare acceleration
 
 int sz = 5;
 
 void setup() {
-   velx = new PVector(
-   vely = new Pvector 
+   vel = new PVector(0,0);
+   vel= new PVector(14,14) ;
  
   size(800, 800);
 
   //initialize location variables
-  locx = width/2;
-  locy = height/2;
+  loc =new PVector( width/2, height/2);
+
 
   //initialize velocity
-  velx = 0;
-  vely = 0;
+ vel = new PVector(0,0);
 
   //initialize acceleration
-  accx = random(-.1, .05);
-  accy = random(-.1, .05);
+ acc = new PVector(random(-.1, .05), random(-.1,.05));
 }
 
 void draw() {
-  accx = random(-.1, .1);
-  accy = random(-.1, .1);
+  acc.set( random (-.1,.1), random(-.1,.1));
 
   fill(0,0,0);
   //stroke(frameCount%360, 100, 50);
   //add acceleration to velocity
-  velx .add (accx);
-  vely += accy;
+  vel .add (acc);
+
 
   //limit velocity to avoid going uncontrollably fast
-  velx = constrain(velx, -5, 5);
-  vely = constrain(vely, -5, 5);
+  vel.limit(5);
+
 
   //add velocity to location
-  locx += velx;
-  locy += vely;
+   loc.add(vel);
 
   //draw a circle
-  ellipse(locx, locy, sz, sz);
+  ellipse(loc.x, loc.y, sz, sz);
 
   //all of these are written so the ball goes completely off the screen
-  if (locx - sz/2 > width) {      //if circle goes off of right edge...
-    locx = -sz/2;                 //...wrap around to left edge
+  if (loc.x - sz/2 > width) {      //if circle goes off of right edge...
+    loc.x = -sz/2;                 //...wrap around to left edge
   }
 
-  if (locx + sz/2 < 0) {          //if circle goes off of left edge....
-    locx = width + sz/2;          //...wrap around to right edge
+  if (loc.x + sz/2 < 0) {          //if circle goes off of left edge....
+    loc.x = width + sz/2;          //...wrap around to right edge
   }
 
-  if (locy - sz/2 > height) {     //if circle goes beyond bottom...
-    locy = -sz/2;                 //...wrap around to top
+  if (loc.y - sz/2 > height) {     //if circle goes beyond bottom...
+    loc.y = -sz/2;                 //...wrap around to top
   }
 
-  if (locy + sz/2 < 0) {          //if circle goes beyond top...
-    locy = height + sz/2;         //...wrap around to bottom
+  if (loc.y + sz/2 < 0) {          //if circle goes beyond top...
+    loc.y = height + sz/2;         //...wrap around to bottom
   }
 }
 
